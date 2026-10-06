@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 
-export default function Home() {
+export default function Home({ onNavigate }) {
   const [token, setToken] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -39,6 +39,30 @@ export default function Home() {
   return (
     <div className="min-h-screen p-6 bg-gray-50 font-sans">
       <div className="max-w-3xl mx-auto">
+        {/* Navigation Menu */}
+        <div className="bg-white rounded-2xl shadow p-4 mb-6">
+          <nav className="flex gap-4">
+            <button
+              onClick={() => onNavigate('home')}
+              className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 font-medium"
+            >
+              Home
+            </button>
+            <button
+              onClick={() => onNavigate('times')}
+              className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 font-medium"
+            >
+              Times
+            </button>
+            <button
+              onClick={() => onNavigate('partidas')}
+              className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 font-medium"
+            >
+              Partidas
+            </button>
+          </nav>
+        </div>
+
         {/* User Profile Section */}
         <div className="bg-white rounded-2xl shadow p-6 mb-6">
           <div className="flex items-center gap-4">
@@ -57,27 +81,6 @@ export default function Home() {
               )}
             </div>
             <LogoutButton />
-          </div>
-        </div>
-
-        {/* Auth0 User Info */}
-        <div className="bg-white rounded-2xl shadow p-6 mb-6">
-          <h2 className="text-xl font-bold mb-4">Informações do Auth0</h2>
-          <div className="space-y-2">
-            <div>
-              <strong>Nome:</strong> {user.name}
-            </div>
-            <div>
-              <strong>Email:</strong> {user.email}
-            </div>
-            <div>
-              <strong>Email Verificado:</strong> {user.email_verified ? "Sim" : "Não"}
-            </div>
-            {user.locale && (
-              <div>
-                <strong>Idioma:</strong> {user.locale}
-              </div>
-            )}
           </div>
         </div>
 
